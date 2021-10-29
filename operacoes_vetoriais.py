@@ -126,5 +126,3 @@ def multiplicar_matriz(mat_a: matriz, mat_b: matriz) -> Union[matriz, None]:
                 soma += mat_a[i][k] * mat_b[k][j]
             mat_c[i][j] = soma
     return mat_c
-
-a = criar_matriz(3, 3, 0)
