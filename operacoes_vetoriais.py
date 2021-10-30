@@ -126,3 +126,27 @@ def multiplicar_matriz(mat_a: matriz, mat_b: matriz) -> Union[matriz, None]:
                 soma += mat_a[i][k] * mat_b[k][j]
             mat_c[i][j] = soma
     return mat_c
+
+
+def matriz_transposta(mat_a: matriz) -> matriz:
+    """Calcula a transposta de uma matriz.
+    
+    Argumentos:
+    --------
+        `mat_a (matriz)`: uma matriz qualquer
+    
+    Retornos:
+    --------
+        `matriz`: a matriz transposta
+    
+    Exemplos:
+    --------
+    >>> matriz_transposta([[1, 2], [3, 4]])
+    >>> output: [[1, 3], [2, 4]]
+    """
+    matriz_retorno: matriz = []
+    for i in range(len(mat_a[0])):
+        matriz_retorno.append([])
+        for j in range(len(mat_a)):
+            matriz_retorno[i].append(mat_a[j][i])
+    return matriz_retorno
