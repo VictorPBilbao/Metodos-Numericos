@@ -1,10 +1,8 @@
-# import Union for types
-from typing import Union
-
+#
 #? Uma matriz é uma lista de listas que contem inteiros ou floats
-matriz = list[list[Union[int, float]]]
+matriz = list[list[int | float]]
 
-def criar_matriz(linhas: int, colunas: int, valores: list[Union[int, float]] or int) -> matriz:
+def criar_matriz(linhas: int, colunas: int, valores: list[int | float] or int) -> matriz:
     """Cria uma matriz de `linhas` x `colunas` e o preenche com os `valores` passados. Primeiro verifica
     se `valores` é uma lista ou um inteiro, e entao cria a matriz e preenche com os `valores`.
     
@@ -90,7 +88,7 @@ def pode_multiplicar(mat_a: matriz, mat_b: matriz) -> bool:
     return colunas == linhas
 
 
-def multiplicar_matriz(mat_a: matriz, mat_b: matriz) -> Union[matriz, None]:
+def multiplicar_matriz(mat_a: matriz, mat_b: matriz) -> matriz | None:
     """Cria um loop triplo para calcular o produto de duas matrizes, se possivel.
     Neste caso, a ordem importa.
     
