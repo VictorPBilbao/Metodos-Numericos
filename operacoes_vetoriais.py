@@ -29,7 +29,7 @@ def criar_matriz(linhas: int, colunas: int, valores: list[int | float] or int) -
     
     #? verifica se valores é um unico valor de inteiro ou float
     if type(valores) in [int, float]:
-        items: list[int] = []
+        # items: list[int] = []
         for _ in range(linhas):
             matriz_retorno.append([valores] * colunas)
     # ? se for valores é uma lista com todos os valores inteiros ou floats
