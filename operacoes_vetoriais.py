@@ -173,7 +173,7 @@ def determinante_matriz(mat_a: matriz) -> float:
     >>> output: -4
     """
     #? checking if its a valid and square matrix
-    if isinstance(mat_a, list):
+    if not isinstance(mat_a, list):
         raise TypeError("Insira uma matriz.")
     if len(mat_a) != len(mat_a[0]):
         raise ValueError("Matriz nao e quadrada")
