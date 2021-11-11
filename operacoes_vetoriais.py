@@ -1,4 +1,4 @@
-#
+#%%
 #? Uma matriz é uma lista de listas que contem inteiros ou floats
 matriz = list[list[int | float]]
 
@@ -147,4 +147,76 @@ def matriz_transposta(mat_a: matriz) -> matriz:
         matriz_retorno.append([])
         for j in range(len(mat_a)):
             matriz_retorno[i].append(mat_a[j][i])
+    return matriz_retorno
+
+
+def determinante_matriz(mat_a: matriz) -> float:
+    """Calcula o determinante de uma matriz. Usa uma funcao recursiva até achar uma matriz 2x2
+    
+    Argumentos:
+    --------
+        `mat_a (matriz)`: uma matriz qualquer
+    
+    Retornos:
+    --------
+        `float`: o determinante da matriz
+    
+    Exemplos:
+    --------
+    >>> determinante_matriz([[1, 2], [3, 4]])
+    >>> output: -2
+    --------
+    >>> determinante_matriz([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    >>> output: 0
+    --------
+    >>> determinante_matriz([[1, 3, 1, 4], [3, 9, 5, 15], [0, 2, 1, 1], [0, 4, 2, 3]])
+    >>> output: -4
+    """
+    #? checking if its a valid and square matrix
+    if isinstance(mat_a, list):
+        raise TypeError("Insira uma matriz.")
+    if len(mat_a) != len(mat_a[0]):
+        raise ValueError("Matriz nao e quadrada")
+    
+    #? break case for the recursion
+    if len(mat_a) == 2:
+        return mat_a[0][0] * mat_a[1][1] - mat_a[0][1] * mat_a[1][0]
+    
+    #? if the matrix is a 1x1, return the value
+    if len(mat_a) == 1 and len(mat_a[0]) == 1:
+        return mat_a[0][0]
+    
+    soma: float = 0
+    for i in range(len(mat_a)):
+        soma += (-1)**i * mat_a[0][i] * determinante_matriz(matriz_submatriz_det(mat_a, i))
+    return soma
+
+
+def matriz_submatriz_det(mat_a: matriz, coluna: int) -> matriz:
+    """Usado internamente pela funcao determinante_matriz(). Dado uma matriz `n` x `n`, retorna uma matriz `n-1` x `n-1`
+    onde se remove a linha e a coluna do valor de `matriz[0][coluna]`
+    
+    Argumentos:
+    --------
+    mat_a (matriz): uma matriz qualquer, deve ser `n` x `n`
+    coluna (int): a coluna em que se encontra o valor a ser removido
+    
+    Retornos:
+    --------
+        matriz: retorna uma matriz `n-1` x `n-1`
+    
+    Exemplos:
+    --------
+    >>> matriz_submatriz_det([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 0)
+    >>> output: [[5, 6], [8, 9]]
+    --------
+    >>> matriz_submatriz_det([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 1)
+    >>> output: [[1, 3], [7, 9]]
+    """
+    matriz_retorno: matriz = []
+    for linha in mat_a[1:]:
+        matriz_retorno.append([])
+        for val, col in enumerate(linha):
+            if val != coluna:
+                matriz_retorno[-1].append(col)
     return matriz_retorno
