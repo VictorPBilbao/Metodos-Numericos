@@ -93,7 +93,7 @@ def pode_multiplicar(mat_a: matriz, mat_b: matriz) -> bool:
     return colunas == linhas
 
 
-def multiplicar_matriz(mat_a: matriz, mat_b: matriz) -> matriz | None:
+def multiplicar_matriz(mat_a: matriz, mat_b: matriz, round_int: int = 2) -> matriz | None:
     """Cria um loop triplo para calcular o produto de duas matrizes, se possivel.
     Neste caso, a ordem importa.
     
@@ -101,6 +101,7 @@ def multiplicar_matriz(mat_a: matriz, mat_b: matriz) -> matriz | None:
     --------
         `mat_a (matriz)`: a primeira matriz a ser multiplicada (mais a esquerda)
         `mat_b (matriz)`: a segunda matriz a ser multiplicada (mais a direita)
+        `round_int`: quantas casas decimais devem ser arredondadas para o resultado. Padrao: 2
     
     Retornos:
     --------
@@ -127,7 +128,7 @@ def multiplicar_matriz(mat_a: matriz, mat_b: matriz) -> matriz | None:
             soma: int = 0
             for k in range(len(mat_a[0])):
                 soma += mat_a[i][k] * mat_b[k][j]
-            mat_c[i][j] = soma
+            mat_c[i][j] = round(soma, round_int)
     return mat_c
 
 
@@ -155,12 +156,13 @@ def matriz_transposta(mat_a: matriz) -> matriz:
     return matriz_retorno
 
 
-def determinante_matriz(mat_a: matriz) -> float:
+def determinante_matriz(mat_a: matriz, round_int: int = 2) -> float:
     """Calcula o determinante de uma matriz. Usa uma funcao recursiva até achar uma matriz 2x2
     
     Argumentos:
     --------
         `mat_a (matriz)`: uma matriz qualquer
+        `round_int`: quantas casas decimais devem ser arredondadas para o resultado. Padrao: 2
     
     Retornos:
     --------
@@ -194,7 +196,7 @@ def determinante_matriz(mat_a: matriz) -> float:
     soma: float = 0
     for i in range(len(mat_a)):
         soma += (-1)**i * mat_a[0][i] * determinante_matriz(matriz_submatriz_det(mat_a, i))
-    return soma
+    return round(soma, round_int)
 
 
 def matriz_submatriz_det(mat_a: matriz, coluna: int) -> matriz:
