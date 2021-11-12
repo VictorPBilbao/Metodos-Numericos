@@ -2,6 +2,7 @@
 #? Uma matriz é uma lista de listas que contem inteiros ou floats
 matriz = list[list[int | float]]
 
+#%%
 def criar_matriz(linhas: int, colunas: int, valores: list[int | float] or int) -> matriz:
     """Cria uma matriz de `linhas` x `colunas` e o preenche com os `valores` passados. Primeiro verifica
     se `valores` é uma lista ou um inteiro, e entao cria a matriz e preenche com os `valores`.
