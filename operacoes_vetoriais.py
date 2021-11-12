@@ -56,10 +56,15 @@ def print_matriz(mat: matriz) -> None:
     """
     linhas = len(mat)
     colunas = len(mat[0])
+    mat_a_transposta = matriz_transposta(mat)
+    
+    longest_cols = [max(len(str(x)) for x in col) for col in mat_a_transposta]
+    
     for i in range(linhas):
+        print("|", end="")
         for j in range(colunas):
-            print(f"{mat[i][j]}", end="  ")
-        print()
+            print(f"{mat[i][j]}".rjust(longest_cols[j] + 1), end="  ")
+        print("|")
 
 
 def pode_multiplicar(mat_a: matriz, mat_b: matriz) -> bool:
