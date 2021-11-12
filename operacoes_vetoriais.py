@@ -65,6 +65,8 @@ def print_matriz(mat: matriz) -> None:
         for j in range(colunas):
             print(f"{mat[i][j]}".rjust(longest_cols[j] + 1), end="  ")
         print("|")
+        if i != linhas - 1:
+            print("|" + " " * (sum(longest_cols) + 3 * len(longest_cols)) + "|")
 
 
 def pode_multiplicar(mat_a: matriz, mat_b: matriz) -> bool:
