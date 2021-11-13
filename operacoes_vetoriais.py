@@ -157,7 +157,7 @@ def matriz_transposta(mat_a: matriz) -> matriz:
             matriz_retorno[i].append(mat_a[j][i])
     return matriz_retorno
 
-
+cache = {}
 def determinante_matriz(mat_a: matriz, round_int: int = 2) -> float:
     """Calcula o determinante de uma matriz. Usa uma funcao recursiva até achar uma matriz 2x2
     
@@ -187,18 +187,24 @@ def determinante_matriz(mat_a: matriz, round_int: int = 2) -> float:
     if len(mat_a) != len(mat_a[0]):
         raise ValueError("Matriz nao e quadrada")
     
-    #? break case for the recursion
-    if len(mat_a) == 2:
-        return mat_a[0][0] * mat_a[1][1] - mat_a[0][1] * mat_a[1][0]
-    
     #? if the matrix is a 1x1, return the value
     if len(mat_a) == 1 and len(mat_a[0]) == 1:
         return mat_a[0][0]
     
+    if len(mat_a) == 2:
+        return mat_a[0][0] * mat_a[1][1] - mat_a[0][1] * mat_a[1][0]
+    
+    if str(mat_a) in cache:
+        return cache[str(mat_a)]
+    else:
+        cache[str(mat_a)] = None
+    
     soma: float = 0
     for i in range(len(mat_a)):
         soma += (-1)**i * mat_a[0][i] * determinante_matriz(matriz_submatriz_det(mat_a, i))
-    return round(soma, round_int)
+    cache[str(mat_a)] = round(soma, round_int)
+    return cache[str(mat_a)]
+    # return round(soma, round_int)
 
 
 def matriz_submatriz_det(mat_a: matriz, coluna: int) -> matriz:
