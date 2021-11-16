@@ -150,12 +150,7 @@ def matriz_transposta(mat_a: matriz) -> matriz:
     >>> matriz_transposta([[1, 2], [3, 4]])
     >>> output: [[1, 3], [2, 4]]
     """
-    matriz_retorno: matriz = []
-    for i in range(len(mat_a[0])):
-        matriz_retorno.append([])
-        for j in range(len(mat_a)):
-            matriz_retorno[i].append(mat_a[j][i])
-    return matriz_retorno
+    return list(zip(*mat_a))
 
 cache = {}
 def determinante_matriz(mat_a: matriz, round_int: int = 2) -> float:
